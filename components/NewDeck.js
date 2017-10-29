@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import { addDeck } from '../actions'
 import { connect } from 'react-redux'
+import { submitDeck } from '../utils/api'
 
 class NewDeck extends Component {
   state = {
@@ -9,7 +10,12 @@ class NewDeck extends Component {
   }
 
   submit = () => {
-    this.props.dispatch(addDeck(this.state.text))
+    const { text } = this.state
+
+    submitDeck(text)
+    this.props.dispatch(addDeck(text))
+    this.props.navigation.navigate('DeckDetail', { deck: text })
+    this.setState({ text: '' })
   }
 
   render() {
