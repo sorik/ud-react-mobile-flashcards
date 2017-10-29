@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
-import { FlatList, View, Text, StyleSheet } from 'react-native'
+import { FlatList, View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
 class DecksList extends Component {
+  static navigationOptions = {
+    title: 'Decks'
+  }
+
   render() {
-    const { decks } = this.props
+    const { decks } = this.props.screenProps
 
     return (
       <View style={styles.container}>
@@ -12,10 +16,13 @@ class DecksList extends Component {
           keyExtractor={(item, index) => item.title}
           renderItem={({ item }) => {
             return (
-              <View style={[styles.separator, styles.deck]}>
+              <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate('DeckDetail', { deck: item.title })}
+                  style={[styles.separator, styles.deck]}
+                >
                 <Text style={styles.title}>{item.title}</Text>
                 <Text style={styles.cards}>{item.questions.length} cards</Text>
-              </View>
+              </TouchableOpacity>
             )
           }}
         />
@@ -27,7 +34,6 @@ class DecksList extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 50,
   },
   deck: {
     flex: 1,

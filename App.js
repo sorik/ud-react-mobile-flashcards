@@ -1,6 +1,7 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StackNavigator } from 'react-navigation'
 import DecksList from './components/DecksList'
+import DeckDetail from './components/DeckDetail'
 
 const decks = {
   React: {
@@ -36,20 +37,21 @@ const decks = {
   }
 }
 
+const MainNavigator = StackNavigator({
+  Home: {
+    screen: DecksList,
+  },
+  DeckDetail: {
+    screen: DeckDetail,
+  }
+}, {
+  headMode: 'none'
+})
+
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <DecksList decks={decks} />
-      </View>
+      <MainNavigator screenProps={{ decks }}/>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
