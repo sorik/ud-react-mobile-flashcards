@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import TextButton from './TextButton'
 import { connect } from 'react-redux'
-import { addCardToDeck } from '../actions'
+import { addCard } from '../actions'
+import { addCardToDeck } from '../utils/api'
 
 class AddCard extends Component {
   state = {
@@ -12,14 +13,17 @@ class AddCard extends Component {
 
   submit = () => {
     const { deck } = this.props.navigation.state.params
+    const card = {
+      question: this.state.question,
+      answer: this.state.answer
+    }
 
-    this.props.dispatch(addCardToDeck({
+    this.props.dispatch(addCard({
       deck,
-      card: {
-        question: this.state.question,
-        answer: this.state.answer
-      }
+      card
     }))
+
+    addCardToDeck(deck, card)
   }
 
   render() {

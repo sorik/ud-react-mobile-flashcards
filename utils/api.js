@@ -21,3 +21,15 @@ export function getDecks() {
       return JSON.parse(result)
     })
 }
+
+export function addCardToDeck(deck, card) {
+  return AsyncStorage.getItem(DECKS_STORAGE_KEY)
+    .then(result => {
+      const decks = JSON.parse(result)
+      AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
+        [deck]: {
+          questions: [...decks[deck].questions, card]
+        }
+      }))
+    })
+}
