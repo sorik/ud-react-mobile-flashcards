@@ -1,14 +1,36 @@
 import React from 'react'
-import { StackNavigator } from 'react-navigation'
+import { StackNavigator, TabNavigator } from 'react-navigation'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import DecksList from './components/DecksList'
 import DeckDetail from './components/DeckDetail'
+import NewDeck from './components/NewDeck'
 import reducer from './reducers'
+
+const Tabs = TabNavigator({
+  Main: {
+    screen: DecksList,
+    navigationOptions: {
+      tabBarLabel: 'DECKS',
+    }
+  },
+  NewDeck: {
+    screen: NewDeck,
+    navigationOptions: {
+      tabBarLabel: 'NEW DECK',
+    }
+  }
+}, {
+  tabBarOptions: {
+    labelStyle: {
+      fontSize: 20,
+    }
+  }
+})
 
 const MainNavigator = StackNavigator({
   Home: {
-    screen: DecksList,
+    screen: Tabs,
   },
   DeckDetail: {
     screen: DeckDetail,
@@ -16,6 +38,7 @@ const MainNavigator = StackNavigator({
 }, {
   headMode: 'none'
 })
+
 
 const store = createStore(reducer)
 
