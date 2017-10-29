@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
+import { connect } from 'react-redux'
 
 class DeckDetail extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -13,14 +14,18 @@ class DeckDetail extends Component {
   }
 
   render() {
-    const { deck } = this.props.navigation.state.params
+    const { title } = this.props
 
     return (
       <View>
-        <Text>{deck}</Text>
+        <Text>{title}</Text>
       </View>
     )
   }
 }
 
-export default DeckDetail
+function mapStateToProps(state, { navigation }){
+  return state[navigation.state.params.deck]
+}
+
+export default connect(mapStateToProps)(DeckDetail)
