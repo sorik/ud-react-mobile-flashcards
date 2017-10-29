@@ -1,10 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { FlatList, View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { getDecks } from '../utils/api'
+import { receiveDecks } from '../actions'
 
 class DecksList extends Component {
   static navigationOptions = {
     title: 'Decks'
+  }
+
+  componentDidMount() {
+    getDecks()
+      .then(decks => {
+        this.props.dispatch(receiveDecks({ decks }))
+      })
   }
 
   render() {
