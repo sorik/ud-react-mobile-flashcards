@@ -12,10 +12,11 @@ class NewDeck extends Component {
   submit = () => {
     const { text } = this.state
 
+    this.setState({ text: '' })
     submitDeck(text)
     this.props.dispatch(addDeck(text))
     this.props.navigation.navigate('DeckDetail', { deck: text })
-    this.setState({ text: '' })
+
   }
 
   render() {

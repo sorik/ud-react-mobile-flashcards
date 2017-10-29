@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import DecksList from './components/DecksList'
 import DeckDetail from './components/DeckDetail'
 import NewDeck from './components/NewDeck'
+import AddCard from './components/AddCard'
 import reducer from './reducers'
 
 const Tabs = TabNavigator({
@@ -34,6 +35,9 @@ const MainNavigator = StackNavigator({
   },
   DeckDetail: {
     screen: DeckDetail,
+  },
+  AddCard: {
+    screen: AddCard,
   }
 }, {
   headMode: 'none'
