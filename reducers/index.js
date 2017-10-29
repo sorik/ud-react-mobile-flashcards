@@ -1,3 +1,5 @@
+import { ADD_DECK } from '../actions'
+
 const dummyDecks = {
   React: {
     title: 'React',
@@ -33,7 +35,20 @@ const dummyDecks = {
 }
 
 function decks(state=dummyDecks, action) {
+  const { title } = action
+
   switch(action.type) {
+    case ADD_DECK:
+      var decks = {
+        ...state,
+        [title]: {
+          title: [title],
+          questions: []
+        }
+      }
+
+      console.log(decks)
+      return decks 
     default:
       return state
   }
