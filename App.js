@@ -1,5 +1,6 @@
-import React from 'react';
-import { StyleSheet, FlatList, View, Text, List } from 'react-native';
+import React from 'react'
+import { StyleSheet, View } from 'react-native'
+import DecksList from './components/DecksList'
 
 const decks = {
   React: {
@@ -39,18 +40,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <FlatList
-          data={Object.values(decks)}
-          keyExtractor={(item, index) => item.title}
-          renderItem={({ item }) => {
-            return (
-              <View>
-                <Text>{item.title}</Text>
-                <Text>{item.questions.length}</Text>
-              </View>
-            )
-          }}
-        />
+        <DecksList decks={decks} />
       </View>
     );
   }
@@ -59,7 +49,6 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
