@@ -24,6 +24,8 @@ class AddCard extends Component {
     }))
 
     addCardToDeck(deck, card)
+
+    this.props.navigation.goBack()
   }
 
   render() {
