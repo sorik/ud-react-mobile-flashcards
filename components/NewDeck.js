@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-nativ
 import { addDeck } from '../actions'
 import { connect } from 'react-redux'
 import { submitDeck } from '../utils/api'
+import TextButton from './TextButton'
 
 class NewDeck extends Component {
   state = {
@@ -28,11 +29,9 @@ class NewDeck extends Component {
           onChangeText={(text) => this.setState({ text })}
           value={this.state.text}
         />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={this.submit}>
-          <Text style={styles.buttonText}>Submit</Text>
-        </TouchableOpacity>
+        <TextButton onPress={this.submit}>
+          Submit
+        </TextButton>
       </View>
     )
   }
@@ -58,20 +57,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 7
   },
-  button: {
-    backgroundColor: 'black',
-    padding: 10,
-    borderRadius: 7,
-    height: 60,
-    marginLeft: 60,
-    marginRight: 60,
-    marginTop: 10,
-    marginBottom: 10
-  },
-  buttonText: {
-    fontSize: 30,
-    color: 'white',
-    textAlign: 'center',
-  }
 })
 export default connect()(NewDeck)
