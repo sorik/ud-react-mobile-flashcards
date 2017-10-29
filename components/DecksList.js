@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { FlatList, View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
 class DecksList extends Component {
@@ -7,7 +8,7 @@ class DecksList extends Component {
   }
 
   render() {
-    const { decks } = this.props.screenProps
+    const { decks } = this.props
 
     return (
       <View style={styles.container}>
@@ -58,4 +59,8 @@ const styles = StyleSheet.create({
   }
 })
 
-export default DecksList
+function mapStateToProps(state) {
+  return { decks: state }
+}
+
+export default connect(mapStateToProps)(DecksList)
