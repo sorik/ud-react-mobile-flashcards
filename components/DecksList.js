@@ -5,9 +5,6 @@ import { getDecks } from '../utils/api'
 import { receiveDecks } from '../actions'
 
 class DecksList extends Component {
-  static navigationOptions = {
-    title: 'Decks'
-  }
 
   componentDidMount() {
     getDecks()

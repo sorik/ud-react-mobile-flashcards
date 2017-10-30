@@ -12,7 +12,7 @@ class DeckDetail extends Component {
       }
     }
   }
-
+  
   render() {
     const { title, questions } = this.props
 
@@ -28,7 +28,9 @@ class DeckDetail extends Component {
             onPress={() => this.props.navigation.navigate('AddCard', { deck: title })}>
             <Text style={styles.buttonText}>Add Card</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => this.props.navigation.navigate('Quiz', { deck: title })}>
             <Text style={styles.buttonText}>Start Quiz</Text>
           </TouchableOpacity>
         </View>
