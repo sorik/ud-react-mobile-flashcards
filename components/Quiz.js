@@ -4,6 +4,15 @@ import { connect } from 'react-redux'
 import TextButton from './TextButton'
 
 class Quiz extends Component {
+  state = {
+    isQuestion: true
+  }
+
+  toggleView = () => {
+    var toggle = !this.state.isQuestion
+    this.setState({ isQuestion: toggle })
+  }
+
   render() {
     const { deck, index, questions, navigation } = this.props
 
@@ -12,12 +21,18 @@ class Quiz extends Component {
         <Text style={styles.count}>
           {index + 1} / {questions.length}
         </Text>
-        <Text style={styles.question}>
-          {questions[index].question}
+        <Text style={styles.quiz}>
+          {this.state.isQuestion
+            ? questions[index].question
+            : questions[index].answer}
         </Text>
         <TouchableOpacity
-          onPress={() => navigation.navigate('Answer', { deck, index })}>
-          <Text style={styles.answerButton}>Answer</Text>
+          onPress={this.toggleView}>
+          <Text style={styles.toggleButton}>
+            {this.state.isQuestion
+              ? 'Answer'
+              : 'Question'}
+          </Text>
         </TouchableOpacity>
         <View style={styles.actions}>
           <TextButton
@@ -44,14 +59,14 @@ const styles = {
     marginLeft: 10,
     paddingTop: 10,
   },
-  question: {
+  quiz: {
     fontSize: 40,
     textAlign: 'center',
     marginTop: 50,
     paddingTop: 20,
     paddingBottom: 10,
   },
-  answerButton: {
+  toggleButton: {
     fontSize: 15,
     color: 'red',
     textAlign: 'center',
