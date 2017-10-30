@@ -1,5 +1,6 @@
 import React from 'react'
 import { StackNavigator, TabNavigator } from 'react-navigation'
+import { View, StatusBar, Platform } from 'react-native'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import DecksList from './components/DecksList'
@@ -9,6 +10,15 @@ import AddCard from './components/AddCard'
 import Quiz from './components/Quiz'
 import Results from './components/Results'
 import reducer from './reducers'
+import { Constants } from 'expo'
+
+function AppStatusBar ({ backgroundColor, ...props }) {
+  return (
+    <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+    </View>
+  )
+}
 
 const Tabs = TabNavigator({
   Main: {
@@ -27,8 +37,11 @@ const Tabs = TabNavigator({
   tabBarOptions: {
     labelStyle: {
       fontSize: 20,
-    }
-  }
+    },
+  },
+  navigationOptions: {
+    header: null
+  },
 })
 
 const MainNavigator = StackNavigator({
@@ -48,7 +61,7 @@ const MainNavigator = StackNavigator({
     screen: Results,
   }
 }, {
-  headMode: 'none'
+  headerMode: 'screen',
 })
 
 
@@ -58,7 +71,10 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <MainNavigator />
+        <View style={{flex: 1}}>
+          <AppStatusBar backgroundColor='black' barStyle="light-content"/>
+          <MainNavigator />
+        </View>
       </Provider>
     );
   }
