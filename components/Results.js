@@ -9,16 +9,18 @@ class Results extends Component {
     clearLocalNotification()
       .then(setLocalNotification)
   }
-  
+
   render() {
     const { deck, total, score, navigation } = this.props
+    let unique = new Set(score)
+
     return (
       <View style={styles.container}>
         <Text style={styles.title}>
           {deck}
         </Text>
         <Text style={styles.score}>
-          You answered {score.length} questions correctly out of {total} questions.
+          You answered {unique.size} questions correctly out of {total} questions.
         </Text>
         <View style={styles.actions}>
           <TextButton
