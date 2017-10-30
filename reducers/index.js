@@ -27,7 +27,6 @@ function decks(state={}, action) {
       }
 
     case RESET_MARKS:
-      console.log('reset')
       return {
         ...state,
         [deck]: {
@@ -37,7 +36,6 @@ function decks(state={}, action) {
       }
 
     case CORRECT_ANSWER:
-      console.log(state)
       return {
         ...state,
         [deck]: {

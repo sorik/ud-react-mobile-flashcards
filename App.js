@@ -7,6 +7,7 @@ import DeckDetail from './components/DeckDetail'
 import NewDeck from './components/NewDeck'
 import AddCard from './components/AddCard'
 import Quiz from './components/Quiz'
+import Results from './components/Results'
 import reducer from './reducers'
 
 const Tabs = TabNavigator({
@@ -43,6 +44,9 @@ const MainNavigator = StackNavigator({
   Quiz: {
     screen: Quiz,
   },
+  Results: {
+    screen: Results,
+  }
 }, {
   headMode: 'none'
 })

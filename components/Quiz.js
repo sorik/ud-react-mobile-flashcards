@@ -16,9 +16,11 @@ class Quiz extends Component {
   }
 
   nextQuiz = () => {
-    const { navigation, deck, index } = this.props
+    const { navigation, deck, index, questions } = this.props
 
-    navigation.navigate('Quiz', { deck, index: index + 1 })
+    index === questions.length - 1
+      ? navigation.navigate('Results', { deck })
+      : navigation.navigate('Quiz', { deck, index: index + 1 })
   }
 
   markAsCorrect = () => {

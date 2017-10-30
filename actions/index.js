@@ -27,7 +27,6 @@ export function addCard({ deck, card }) {
 }
 
 export function resetMarks(deck) {
-  console.log('action:resetMarks')
   return {
     type: RESET_MARKS,
     deck
