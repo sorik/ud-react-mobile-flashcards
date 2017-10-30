@@ -39,9 +39,13 @@ class DeckDetail extends Component {
             <Text style={styles.buttonText}>Add Card</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.button}
-            onPress={this.startQuiz}>
-            <Text style={styles.buttonText}>Start Quiz</Text>
+            style={ styles.button}
+            onPress={questions.length > 0 ? this.startQuiz : () => {}}>
+            <Text
+              style={questions.length > 0
+                      ? styles.buttonText
+                      : [styles.buttonText, styles.buttonDisabled]}>
+              Start Quiz</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -73,6 +77,9 @@ const styles = StyleSheet.create({
   },
   actions: {
     flex: 1
+  },
+  buttonDisabled: {
+    color: 'gray',
   },
   button: {
     backgroundColor: 'black',
