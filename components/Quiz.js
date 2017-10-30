@@ -15,12 +15,24 @@ class Quiz extends Component {
     this.setState({ isQuestion: toggle })
   }
 
+  nextQuiz = () => {
+    const { navigation, deck, index } = this.props
+
+    navigation.navigate('Quiz', { deck, index: index + 1 })
+  }
+
   markAsCorrect = () => {
     const { deck, index } = this.props
 
     answerCorrect(deck, index)
 
     this.props.dispatch(correctAnswer({ deck, index }))
+
+    this.nextQuiz()
+  }
+
+  markAsIncorrect = () => {
+    this.nextQuiz()
   }
 
   render() {
@@ -51,7 +63,8 @@ class Quiz extends Component {
             Correct
           </TextButton>
           <TextButton
-            style={styles.incorrectButton}>
+            style={styles.incorrectButton}
+            onPress={this.markAsIncorrect}>
             Incorrect
           </TextButton>
         </View>
