@@ -33,3 +33,27 @@ export function addCardToDeck(deck, card) {
       }))
     })
 }
+
+export function resetAnswers(deck) {
+  return AsyncStorage.getItem(DECKS_STORAGE_KEY)
+    .then(result => {
+      const decks = JSON.parse(result)
+      AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
+        [deck]: {
+          correctAnswers: []
+        }
+      }))
+    })
+}
+
+export function answerCorrect(deck, index) {
+  return AsyncStorage.getItem(DECKS_STORAGE_KEY)
+    .then(result => {
+      const decks = JSON.parse(result)
+      AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
+        [deck]: {
+          correctAnswers: [...decks[deck].correctAnswers, index]
+        }
+      }))
+    })
+}

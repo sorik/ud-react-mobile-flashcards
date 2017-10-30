@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import TextButton from './TextButton'
+import { correctAnswer } from '../actions'
+import { answerCorrect } from '../utils/api'
 
 class Quiz extends Component {
   state = {
@@ -11,6 +13,14 @@ class Quiz extends Component {
   toggleView = () => {
     var toggle = !this.state.isQuestion
     this.setState({ isQuestion: toggle })
+  }
+
+  markAsCorrect = () => {
+    const { deck, index } = this.props
+
+    answerCorrect(deck, index)
+
+    this.props.dispatch(correctAnswer({ deck, index }))
   }
 
   render() {
@@ -36,7 +46,8 @@ class Quiz extends Component {
         </TouchableOpacity>
         <View style={styles.actions}>
           <TextButton
-            style={styles.correctButton }>
+            style={styles.correctButton}
+            onPress={this.markAsCorrect}>
             Correct
           </TextButton>
           <TextButton
