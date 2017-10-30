@@ -2,8 +2,14 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import TextButton from './TextButton'
+import { clearLocalNotification, setLocalNotification,} from '../utils/notificationHelper'
 
 class Results extends Component {
+  componentDidMount() {
+    clearLocalNotification()
+      .then(setLocalNotification)
+  }
+  
   render() {
     const { deck, total, score, navigation } = this.props
     return (
