@@ -2,12 +2,21 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import TextButton from './TextButton'
-import { correctAnswer } from '../actions'
-import { answerCorrect } from '../utils/api'
+import { resetMarks, correctAnswer } from '../actions'
+import { resetAnswers, answerCorrect } from '../utils/api'
 
 class Quiz extends Component {
   state = {
     isQuestion: true
+  }
+
+  componentDidMount = () => {
+    const { deck, index } = this.props
+
+    if (index === 0) {
+      resetAnswers(deck)
+      this.props.dispatch(resetMarks(deck))
+    }
   }
 
   toggleView = () => {

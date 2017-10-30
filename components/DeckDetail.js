@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
-import { resetMarks } from '../actions'
-import { resetAnswers } from '../utils/api'
 
 class DeckDetail extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -15,16 +13,8 @@ class DeckDetail extends Component {
     }
   }
 
-  startQuiz = () => {
-    const { title } = this.props
-
-    resetAnswers(title)
-    this.props.dispatch(resetMarks(title))
-    this.props.navigation.navigate('Quiz', { deck: title })
-  }
-
   render() {
-    const { title, questions } = this.props
+    const { title, questions, navigation } = this.props
 
     return (
       <View style={styles.container}>
@@ -35,12 +25,14 @@ class DeckDetail extends Component {
         <View style={styles.actions}>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => this.props.navigation.navigate('AddCard', { deck: title })}>
+            onPress={() => navigation.navigate('AddCard', { deck: title })}>
             <Text style={styles.buttonText}>Add Card</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={ styles.button}
-            onPress={questions.length > 0 ? this.startQuiz : () => {}}>
+            onPress={questions.length > 0
+                      ? () => navigation.navigate('Quiz', { deck: title })
+                      : () => {}}>
             <Text
               style={questions.length > 0
                       ? styles.buttonText
