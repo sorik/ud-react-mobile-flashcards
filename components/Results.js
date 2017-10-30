@@ -19,7 +19,8 @@ class Results extends Component {
             onPress={() => navigation.navigate('Quiz', { deck })}>
             Restart Quiz
           </TextButton>
-          <TextButton>
+          <TextButton
+            onPress={() => navigation.navigate('DeckDetail', { deck })}>
             Back to Deck
           </TextButton>
         </View>
