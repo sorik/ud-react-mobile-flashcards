@@ -4,7 +4,7 @@ import { TouchableOpacity, Text, StyleSheet } from 'react-native'
 export default function TextButton({ children, onPress, style={} }) {
   return (
     <TouchableOpacity
-      style={styles.button}
+      style={[styles.button, style]}
       onPress={onPress}>
       <Text style={[styles.text, style]}>{children}</Text>
     </TouchableOpacity>
