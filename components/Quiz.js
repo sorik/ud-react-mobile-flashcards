@@ -5,7 +5,7 @@ import TextButton from './TextButton'
 
 class Quiz extends Component {
   render() {
-    const { deck, index, questions } = this.props
+    const { deck, index, questions, navigation } = this.props
 
     return (
       <View style={styles.container}>
@@ -15,7 +15,8 @@ class Quiz extends Component {
         <Text style={styles.question}>
           {questions[index].question}
         </Text>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Answer', { deck, index })}>
           <Text style={styles.answerButton}>Answer</Text>
         </TouchableOpacity>
         <View style={styles.actions}>
